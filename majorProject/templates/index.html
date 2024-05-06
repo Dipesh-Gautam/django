@@ -20,6 +20,8 @@
 		<div class="form-v3-content">
 			<form class="form-detail" action="#" method="post" id="myform">
 				{% csrf_token %}
+
+				{% for book in books %}
 				<h2>Booking Tickets</h2>
 				<p class="text">Orci ac auctor augue mauris augue neque gravida in hendrerit gravida rutrum.</p>
 				<div class="form-group">
@@ -55,7 +57,7 @@
 					</div>
 				</div>
 				<div class="special">
-					<span>$20.00</span>
+					<span>${{book.price}}</span>
 					<p>/ VIP Person</p>
 				</div>
 				<div class="form-checkbox">
@@ -64,10 +66,16 @@
 					  	<span class="checkmark"></span>
 					</label>
 				</div>
+				{% if book.offer%}
+				<div class="form-offer"><b>Special offer available</b></div>
+				{% endif %}
 				<div class="form-row-last">
 					<input type="submit" name="register" class="register" value="BUY NOW">
 				</div>
+				{% endfor %}
+
 			</form>
+			
 			<div class="form-right">
 				<div class="form-images-1">
 					<img src="{% static 'images/form-v3-1.jpg' %}" alt="form-v3-1">
@@ -83,7 +91,9 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
+	
 	<!-- Jquery -->
 	<script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' %}"></script>
  	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
